@@ -1,6 +1,13 @@
-package com.products.productinfo.model;
+package com.products.productinfo.domain;
 
-public class Item {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+@Entity
+public class ItemEntity {
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;
 	private String product;
 	private String description;
@@ -11,11 +18,11 @@ public class Item {
 	private String category;
 	private Double price;
 	
-	public Item() {
+	public ItemEntity() {
 		super();
 	}
-	public Item(long id, String product, String description, Integer quantity, String units, String shop, String date,
-			String category, Double price) {
+	public ItemEntity(long id, String product, String description, Integer quantity, String units, String shop,
+			String date, String category, Double price) {
 		super();
 		this.id = id;
 		this.product = product;
@@ -32,12 +39,6 @@ public class Item {
 	}
 	public void setId(long id) {
 		this.id = id;
-	}
-	public Double getPrice() {
-		return price;
-	}
-	public void setPrice(Double price) {
-		this.price = price;
 	}
 	public String getProduct() {
 		return product;
@@ -81,5 +82,10 @@ public class Item {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	
+	public Double getPrice() {
+		return price;
+	}
+	public void setPrice(Double price) {
+		this.price = price;
+	}
 }
