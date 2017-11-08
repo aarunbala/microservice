@@ -9,6 +9,7 @@ import org.springframework.cloud.sleuth.Span;
 import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,9 +30,9 @@ public class ItemController {
 	private Tracer tracer;
 
 	@GetMapping(path = "/getAllItems")
-	public List<Item> getAllItems() {
+	public List<Item> getAllItems(@RequestHeader(value = "correlationId") String correlationId) {
 
-		Span.SpanBuilder builder = Span.builder().traceId(Span.hexToId("111111111111111111111111111"));
+		Span.SpanBuilder builder = Span.builder().traceId(Span.hexToId(correlationId));
 		Span start = builder.build();
 		this.tracer.createSpan("abc", start);
 
